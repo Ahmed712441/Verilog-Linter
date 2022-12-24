@@ -1,12 +1,28 @@
-module arithmeticTest();
+module blocksTest();
     input a;
     input b;
     input cond;
-  	output[3:0] c;
+    input x;
+  	output reg[3:0] c;
+    reg[4:0] sum;
+    reg[4:0] sub;
+    
 
-    c = a+b;
-    a = a+2'b11;
-    cond = c;
-    c = cond & a + b;
+    initial
+      begin
+        c = a+b;
+      end
+    
+    always @(a or b or c)
+      begin
+        if(a)
+          begin
+            cond = 3'b00X;
+          end
+        else
+          begin
+            sum = 1'b0;
+          end
+      end
     
 endmodule;

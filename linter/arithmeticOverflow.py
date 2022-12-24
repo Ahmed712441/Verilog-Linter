@@ -17,7 +17,9 @@ def parse_variable_size(statement:list,variables:dict,index:int):
 
 def verify_statement(statement:list,variables:dict):
     
-    
+    '''
+    return the left_hand_size of the statement and the largest value right_hand_size can take
+    '''  
     left_hand_size , i = parse_variable_size(statement,variables,0)
     right_hand_size , i = parse_variable_size(statement,variables,i+1) 
     

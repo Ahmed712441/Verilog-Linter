@@ -1,16 +1,19 @@
-def get_variables(tokens:list)-> dict:
+def get_variables(tokens:list)-> tuple:
 
     '''
-    return all variables in the verliog module as dictory key is variable name value is variable size
+    return all variables , registers in the verliog module as dictory key is variable name value is variable size
     '''
 
     variables = dict()
+    registers = dict()
     i = 0
     while i < len(tokens): 
         token = tokens[i]
         if token == 'input' or token == 'output' or token == 'reg':
+            register = token == 'reg'
             if tokens[i+1] == 'reg':
                 i+=1
+                register = True
             if tokens[i+1] == '[':
                 start = int(tokens[i+2])
                 end = int(tokens[i+4])
@@ -22,9 +25,13 @@ def get_variables(tokens:list)-> dict:
                 var = tokens[i+1]
                 i+=1
             
-            variables[var] = abs(start-end)+1
+            if register: 
+                registers[var] = abs(start-end)+1
+            else:
+                variables[var] = abs(start-end)+1
         i+=1
-    return variables
+    
+    return variables , registers
 
 def get_statements(tokens:list)->list :
 
@@ -51,3 +58,48 @@ def get_statements(tokens:list)->list :
             statements.append(statement)
         i+=1
     return statements
+
+def get_blocks(tokens:list) -> list:
+
+    '''
+    returns all initial , always , if-else block start and end lines
+    '''
+
+    i = 0
+    blocks = []
+    blocks_stack = []
+    current_line = 1
+    while i < len(tokens):
+        if tokens[i] == '\n':
+            current_line += 1
+        if tokens[i] in ['always','initial','if','else','else if'] : 
+            blocks_stack.append((tokens[i],current_line))
+        elif tokens[i] in ['end']:
+            block , start_line = blocks_stack.pop()
+            blocks.append((block , start_line,current_line))
+        i+=1
+    
+    return blocks
+
+def filterBlocks(block:list):
+    
+    if block[0] in ['if','else','else if'] :
+        return True
+    else:
+        return False
+
+def create_register_dictonary(registers:dict):
+    
+    output = dict()
+    for key in registers.keys():
+        output[key] = [0 for i in range(registers[key])]
+    return output
+
+def create_blocks_dictonary(blocks:list,registers:dict):
+
+    output = dict()
+
+    for block in blocks:
+        output[block[0]+'_'+str(block[1])+'_'+str(block[2])] = create_register_dictonary(registers)
+
+    return output

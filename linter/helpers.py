@@ -88,6 +88,10 @@ def filterBlocks(block:list):
     else:
         return False
 
+def add_two_arr(arr1:list,arr2:list):
+    for i in range(len(arr1)):
+        arr1[i] += arr2[i]
+
 def create_register_dictonary(registers:dict):
     
     output = dict()
@@ -98,8 +102,28 @@ def create_register_dictonary(registers:dict):
 def create_blocks_dictonary(blocks:list,registers:dict):
 
     output = dict()
-
-    for block in blocks:
-        output[block[0]+'_'+str(block[1])+'_'+str(block[2])] = create_register_dictonary(registers)
-
+    toback = 0
+    for i in range(len(blocks)):
+        block  = blocks[i]
+        if block[0] in ['if','else','else if']:
+            toback += 1
+        else:
+            block_dict = dict() 
+            while toback > 0:
+                old_block = blocks[i-toback]
+                block_dict[old_block[0]+'_'+str(old_block[1])+'_'+str(old_block[2])] = create_register_dictonary(registers)
+                toback -= 1
+            if len(block_dict) == 0:
+                output[block[0]+'_'+str(block[1])+'_'+str(block[2])] = create_register_dictonary(registers)
+            else:
+                output[block[0]+'_'+str(block[1])+'_'+str(block[2])] = block_dict
     return output
+
+
+def keyExists(dictonary:dict,key:str):
+
+    try:
+        dictonary[key]
+        return True
+    except:
+        return False

@@ -15,14 +15,16 @@ module blocksTest();
     
     always @(a or b or c)
       begin
+        sub = 4'b0000;
         if(a)
           begin
-            cond = 3'b00X;
+            sum[2:4] = 3'b00X;
           end
         else
           begin
             sum = 1'b0;
           end
       end
-    
+
+    c = a+b;
 endmodule;

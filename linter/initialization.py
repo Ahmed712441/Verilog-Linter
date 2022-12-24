@@ -17,19 +17,3 @@ def dontCareAssignment(statements:list):
                 print(f"X-ASSIGNMENT at line {line} , statement : {' '.join(statement)}")
                 break
             i+=1
-
-def block_assignment(statements:list,blocks:list,registers:dict)-> dict:
-    
-    '''
-    used for infer latch detection
-    '''
-
-    blocks_dict = create_blocks_dictonary(blocks,registers)
-    print(blocks_dict)
-    # block , start_line , end_line = blocks.pop()
-    # for statement,line in statements:
-    #     if line < start_line:
-    #         continue
-        
-    #     i =  statement.index('=')+1
-        

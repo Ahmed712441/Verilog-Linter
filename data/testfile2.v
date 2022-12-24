@@ -7,6 +7,6 @@ module arithmeticTest();
     c = a+b;
     a = a+2'b11;
     cond = c;
-    c = cond & a + b;
+    c[m] = cond[10:0] & a + b;
 
 endmodule;

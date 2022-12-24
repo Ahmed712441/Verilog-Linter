@@ -39,7 +39,11 @@ def get_statements(tokens:list)->list :
         if tokens[i] == '\n':
             current_line += 1
         if tokens[i] == '=':
-            statement = ([tokens[i-1],tokens[i]],current_line) 
+            statement = ([],current_line) 
+            j = i
+            while not tokens[j] in [';','begin','end','\n'] :
+                statement[0].insert(0,tokens[j])
+                j-=1
             i += 1
             while tokens[i] != ';':
                 statement[0].append(tokens[i])

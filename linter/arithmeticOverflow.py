@@ -1,43 +1,39 @@
-def get_size(token:str,variables:dict):
+def parse_variable_size(statement:list,variables:dict,index:int):
 
-    if token[0] >= '0' and token[0] <= '9':
-        return int(token[0])      
-    else:
-        return variables[token]
-
-def get_start(statement:list,variables:dict):
     '''
-    function returns the size of left_hand_size variable and index of the equal sign
+    gives you variable size and the index of the token after variable 
     '''
-    print(statement)
-    if len(statement) > 6 and statement[1] == '[' and statement[3] == ':' :
-        start = int(statement[2])
-        end = int(statement[4])
+    if statement[index][0] >= '0' and statement[index][0] <= '9':
+        return int(statement[index][0]) , index+1
+    elif len(statement) >= index+6 and statement[index+1] == '[' and statement[index+3] == ':' :
+        start = int(statement[index+2])
+        end = int(statement[index+4])
         size = abs(start-end) + 1
-        return size , 6 
-    elif len(statement) > 4 and statement[1] == '[' and statement[3] == ']':
-        return 1 , 4
+        return size , index+6
+    elif len(statement) >= index+4 and statement[index+1] == '['  :
+        return 1 , index+4
     else:
-        return variables[statement[0]] , 1
+        return variables[statement[index]],index+1
 
 def verify_statement(statement:list,variables:dict):
     
-    # left_hand_size , index =  #get_start(statement,variables)
-    left_hand_size = variables[statement[0]]
-    right_hand_size = variables[statement[2]]
-    i = 3
+    
+    left_hand_size , i = parse_variable_size(statement,variables,0)
+    right_hand_size , i = parse_variable_size(statement,variables,i+1) 
+    
     while i < len(statement):
         token = statement[i]
         if token in [ '^','&','|','-','/']:
-            right_hand_size = max(right_hand_size,get_size(statement[i+1],variables))
-            i+=1
+            size , i = parse_variable_size(statement,variables,i+1)
+            right_hand_size = max(right_hand_size,size)
         elif token == '+':
-            right_hand_size = max(right_hand_size,get_size(statement[i+1],variables))+1
-            i+=1
+            size , i = parse_variable_size(statement,variables,i+1)
+            right_hand_size = right_hand_size+1
         elif token == '*':
-            right_hand_size = right_hand_size+get_size(statement[i+1],variables)
+            size , i = parse_variable_size(statement,variables,i+1)
+            right_hand_size = right_hand_size+size
+        else:
             i+=1
-        i+=1
     return left_hand_size , right_hand_size
 
 def detectOverflow(statements,variables):

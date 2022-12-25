@@ -48,7 +48,7 @@ def get_left_hand_bits(statement:list,start_bit:int,end_bit:int):
 
 def block_assignment(statements:list,blocks:list,registers:dict,variables:dict)-> dict:   
     '''
-    used for infer latch detection
+    used for initialization detection
     '''
     blocks_dict = create_blocks_dictonary(blocks,registers)
     for statement in statements:
@@ -86,24 +86,6 @@ def get_assignment_errors(blocks_dict:dict,registers:dict):
 def infer_latch(statements:list,blocks:list,registers:dict,variables:dict):
 
     blocks_dict = block_assignment(statements,blocks,registers,variables)
-
-    # assigned_previous = create_register_dictonary(registers)
     
-    # assignment_errors = {
-	#     'c':[0,1],
-	#     'sum':[0,2,3,4],
-	#     'sub':[0,1,2,3,4,5]
-    # }
-    
-    errors = []
-    # registers_names = registers.keys()
     get_assignment_errors(blocks_dict,registers)
-    # for key in blocks_dict.keys():
-    #     selected_dict = blocks_dict[key]
-    #     if keyExists(selected_dict,registers_names[0]):
-    #         for reg in registers_names:
-    #             arr = selected_dict[reg]
-    #             for i in range(len(arr)):
-    #                 if arr[i] == 0 :
-    #                     # errors.append(f'{reg} ')
-    #                     pass
+    

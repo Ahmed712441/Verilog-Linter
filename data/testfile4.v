@@ -26,5 +26,5 @@ module blocksTest();
           end
       end
 
-    c = a+b;
+    c = 3b'001+3b'100;
 endmodule;

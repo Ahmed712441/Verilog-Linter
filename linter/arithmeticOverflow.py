@@ -1,3 +1,13 @@
+ARITHMETICPRECEDENCE = {
+    '|' : 1,
+    '^' : 2,
+    '&' : 3,
+    '+' : 4,
+    '-' : 4,
+    '*' : 5,
+    '/' : 5,
+}
+
 def parse_variable_size(statement:list,variables:dict,index:int):
 
     '''

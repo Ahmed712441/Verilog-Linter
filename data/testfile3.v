@@ -1,4 +1,4 @@
-module fullader ();
+module fullader();
   input a;
   input b;
   input cin;
@@ -38,7 +38,6 @@ module fullader ();
       out = cin;
     end
   endcase
-
 
 
 endmodule

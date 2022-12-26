@@ -1,19 +1,41 @@
+class Variable:
+
+    def __init__(self,name,size,direction,type):
+        self.name = name
+        self.size  = size
+        self.direction = direction
+        self.type = type
+ 
+    def __repr__(self) -> str:
+        return self.name + '_' + str(self.size) + '_' +  self.direction + '_' + self.type
+
+def get_dictonary_variables(variables:list):
+    output = dict()
+
+    for var in variables:
+        output[var.name] = var.size 
+
+    return output
+
 def get_variables(tokens:list)-> tuple:
 
     '''
     return all variables , registers in the verliog module as dictory key is variable name value is variable size
     '''
 
+    all_variables = []
+
     variables = dict()
     registers = dict()
     i = 0
     while i < len(tokens): 
         token = tokens[i]
-        if token == 'input' or token == 'output' or token == 'reg':
-            register = token == 'reg'
+        if token == 'input' or token == 'output' :
+            direction = token
+            typee = 'wire' 
             if tokens[i+1] == 'reg':
+                typee = 'reg' 
                 i+=1
-                register = True
             if tokens[i+1] == '[':
                 start = int(tokens[i+2])
                 end = int(tokens[i+4])
@@ -24,14 +46,24 @@ def get_variables(tokens:list)-> tuple:
                 end = 0
                 var = tokens[i+1]
                 i+=1
-            
-            if register: 
-                registers[var] = abs(start-end)+1
+            all_variables.append(Variable(var,abs(start-end)+1,direction,typee))
+        elif token  == 'reg':
+            direction = 'output'
+            typee = 'reg'
+            if tokens[i+1] == '[':
+                start = int(tokens[i+2])
+                end = int(tokens[i+4])
+                var = tokens[i+6]
+                i+=6
             else:
-                variables[var] = abs(start-end)+1
+                start = 0
+                end = 0
+                var = tokens[i+1]
+                i+=1
+            all_variables.append(Variable(var,abs(start-end)+1,direction,typee)) 
         i+=1
     
-    return variables , registers
+    return all_variables
 
 def get_statements(tokens:list)->list :
 

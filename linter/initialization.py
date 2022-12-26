@@ -41,7 +41,7 @@ def get_left_hand_bits(statement:list,start_bit:int,end_bit:int):
         end = int(statement[4])
         return (min(start,end),max(start,end))
     elif statement[1] == '[' :
-        return (int(statement[0]),int(statement[1]))
+        return (int(statement[2]),int(statement[2]))
 
 
 
@@ -62,9 +62,9 @@ def get_assignment_errors(statements:list,registers:dict,variables:dict):
 
     assignment_errors = statement_assignment(statements,registers,variables)
     registers_names = list(registers.keys())
-
+    
     for reg in registers_names:
         arr = assignment_errors[reg]
         for i in range(len(arr)):
             if arr[i] == 0:
-                print(f'OverAll Assignment error in register: {reg} bit {i} will never get a value')
+                print(f'OverAll Assignment error in variable: {reg}[{i}] will never get a value')

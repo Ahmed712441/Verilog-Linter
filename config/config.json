@@ -1,0 +1,8 @@
+{
+    "Donot Care Assignment" : true,
+    "Overflow": true ,
+    "Intialization": true,
+    "Non Full/Parallel Cases": true,
+    "DrivenBus" : true,
+    "UnreachableFSM and deadlocks" : true 
+}

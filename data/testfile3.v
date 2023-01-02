@@ -2,12 +2,12 @@ module fullader();
   input a;
   input b;
   input cin;
-  output out;
-  inout carry;
+  reg out;
+  output carry;
   reg[3:0] testvar;
 
-  assign out = a^b^cin;
-  assign carry = (a&b) | (cin&a) | (cin&b);
+  out = a^b^cin;
+  carry = a&b | cin&a | cin&b;
   
   case(a)
     1'b0: begin

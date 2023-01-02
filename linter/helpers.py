@@ -1,3 +1,9 @@
+from pathlib import Path
+import os
+
+BASE_DIR = Path(__file__).resolve().parent.parent.__str__()
+report = []
+
 class Variable:
 
     def __init__(self,name,size,direction,type):
@@ -89,7 +95,16 @@ def get_statements(tokens:list)->list :
                 i+=1
             statements.append(statement)
         i+=1
-    return statements
+    
+    new_statements = []
+    intialized_reg = []
+    for statement in statements:
+        if statement[0][0] != 'reg':
+            new_statements.append(statement)
+        else :
+            intialized_reg.append(statement)
+    
+    return new_statements,intialized_reg
 
 def get_blocks(tokens:list) -> list:
 
@@ -159,3 +174,16 @@ def keyExists(dictonary:dict,key:str):
         return True
     except:
         return False
+
+
+def writeOutFile(fileName:str = 'report.txt'):
+
+    with open(os.path.join(BASE_DIR,'reports',fileName),'w') as f:
+        for line in report:
+            f.write(line+'\n')
+            # f.writeline(report)
+
+# def writeToFile(fileName:str , val:str):
+    
+#     with open(os.path.join(BASE_DIR,'reports',fileName),'a+') as f:
+#         f.write(val+'\n')

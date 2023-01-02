@@ -1,0 +1,7 @@
+OverAll Assignment error in variable: out[0] will never get a value
+Full Case Warning in case at line 7 , value: 010 has no matches
+Full Case Warning in case at line 7 , value: 101 has no matches
+Full Case Warning in case at line 7 , value: 110 has no matches
+Full Case Warning in case at line 7 , value: 111 has no matches
+Deadlock State Warning in case at line 7 when state = 3'b011
+Unreachable FSM State 3'b100 in case at line 7

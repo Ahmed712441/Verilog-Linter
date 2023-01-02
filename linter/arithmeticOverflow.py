@@ -1,3 +1,5 @@
+from linter.helpers import report
+
 ARITHMETICPRECEDENCE = {
     '|' : 1,
     '^' : 2,
@@ -51,6 +53,9 @@ def verify_statement(statement:list,variables:dict):
 def detectOverflow(statements,variables):
    
     for statement in statements:
+        # statementt = statement[0]
+        
         left_hand_size , right_hand_size = verify_statement(statement[0],variables)
         if right_hand_size > left_hand_size:
             print(f"Assignment Overflow Warning on line {statement[1]} statement : {' '.join(statement[0])} left-hand size is {left_hand_size} and right-hand size might be {right_hand_size}")
+            report.append(f"Assignment Overflow Warning on line {statement[1]} statement : {' '.join(statement[0])} left-hand size is {left_hand_size} and right-hand size might be {right_hand_size}")

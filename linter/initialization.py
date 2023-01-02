@@ -16,6 +16,7 @@ def dontCareAssignment(statements:list):
             token = statement[i]
             if hasDontCare(token):
                 print(f"X-ASSIGNMENT at line {line} , statement : {' '.join(statement)}")
+                report.append(f"X-ASSIGNMENT at line {line} , statement : {' '.join(statement)}")
                 break
             i+=1
 
@@ -68,3 +69,4 @@ def get_assignment_errors(statements:list,registers:dict,variables:dict):
         for i in range(len(arr)):
             if arr[i] == 0:
                 print(f'OverAll Assignment error in variable: {reg}[{i}] will never get a value')
+                report.append(f'OverAll Assignment error in variable: {reg}[{i}] will never get a value')

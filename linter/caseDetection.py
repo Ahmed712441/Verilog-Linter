@@ -74,14 +74,14 @@ class CaseNode:
         for value in self.map.keys():
             matches = self.map[value]
             if matches > 1:
-                print(f'Parallel Case Warning in {self.name} at line {self.line} , value: {value} has {matches} matches')
+                # print(f'Parallel Case Warning in {self.name} at line {self.line} , value: {value} has {matches} matches')
                 report.append(f'Parallel Case Warning in {self.name} at line {self.line} , value: {value} has {matches} matches')
 
     def full_check(self):
         for value in self.map.keys():
             matches = self.map[value]
             if matches == 0:
-                print(f'Full Case Warning in {self.name} at line {self.line} , value: {value} has no matches')
+                # print(f'Full Case Warning in {self.name} at line {self.line} , value: {value} has no matches')
                 report.append(f'Full Case Warning in {self.name} at line {self.line} , value: {value} has no matches')
 
 

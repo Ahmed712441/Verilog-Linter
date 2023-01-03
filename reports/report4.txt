@@ -1,0 +1,6 @@
+X-ASSIGNMENT at line 21 , statement : sum [ 2 : 4 ] = 3'b00X
+Assignment Overflow Warning on line 30 statement : out1 [ 1 ] = 2'b00 left-hand size is 1 and right-hand size might be 2
+OverAll Assignment error in variable: sum[1] will never get a value
+OverAll Assignment error in variable: out1[0] will never get a value
+OverAll Assignment error in variable: out1[2] will never get a value
+BUS_VALUE_CONFLICT at out1[1] as it is assigned multiple values concurrently at lines 30,31

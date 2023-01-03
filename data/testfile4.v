@@ -1,4 +1,4 @@
-module blocksTest();
+module busTest();
     input a;
     input b;
     input cond;
@@ -28,4 +28,6 @@ module blocksTest();
 
     c = 3b'001+3b'100;
     out1[1] = 2'b00; 
+    out1[1] = 1'b0;
+    
 endmodule;

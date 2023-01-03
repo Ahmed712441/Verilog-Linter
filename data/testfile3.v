@@ -1,43 +1,31 @@
-module fullader();
-  input a;
-  input b;
-  input cin;
-  reg out;
-  output carry;
-  reg[3:0] testvar;
+module blocksTest();
+    input a;
+    input b;
+    input cond;
+    input x;
+  	output reg[3:0] c;
+    reg[4:0] sum;
+    reg[4:0] sub;
+    output[2:0] out1;
 
-  out = a^b^cin;
-  carry = a&b | cin&a | cin&b;
-  
-  case(a)
-    1'b0: begin
-      out = carry;
-    end
-    1'b1: begin
-      out = cin;
-    end
-  endcase
+    initial
+      begin
+        c = a+b;
+      end
+    
+    always @(a or b or c)
+      begin
+        sub = 4'b0000;
+        if(a)
+          begin
+            sum[2:4] = 3'b00X;
+          end
+        else
+          begin
+            sum = 1'b0;
+          end
+      end
 
-  casez(testvar)
-    4'b1z11: begin
-      out = carry;
-    end
-    4'b1011: begin
-      out = cin;
-    end
-    4'bz111: begin
-      out = cin;
-    end
-    4'b00zz: begin
-      out = cin;
-    end
-    4'b0011: begin
-      out = cin;
-    end
-    4'b000z: begin
-      out = cin;
-    end
-  endcase
-
-
-endmodule
+    c = 3b'001+3b'100;
+    out1[1] = 2'b00; 
+endmodule;

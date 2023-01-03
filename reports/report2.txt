@@ -1,0 +1,18 @@
+OverAll Assignment error in variable: testvar[0] will never get a value
+OverAll Assignment error in variable: testvar[1] will never get a value
+OverAll Assignment error in variable: testvar[2] will never get a value
+OverAll Assignment error in variable: testvar[3] will never get a value
+Parallel Case Warning in casez at line 14 , value: 0000 has 2 matches
+Parallel Case Warning in casez at line 14 , value: 0001 has 2 matches
+Parallel Case Warning in casez at line 14 , value: 0011 has 2 matches
+Parallel Case Warning in casez at line 14 , value: 1011 has 2 matches
+Parallel Case Warning in casez at line 14 , value: 1111 has 2 matches
+Full Case Warning in casez at line 14 , value: 0100 has no matches
+Full Case Warning in casez at line 14 , value: 0101 has no matches
+Full Case Warning in casez at line 14 , value: 0110 has no matches
+Full Case Warning in casez at line 14 , value: 1000 has no matches
+Full Case Warning in casez at line 14 , value: 1001 has no matches
+Full Case Warning in casez at line 14 , value: 1010 has no matches
+Full Case Warning in casez at line 14 , value: 1100 has no matches
+Full Case Warning in casez at line 14 , value: 1101 has no matches
+Full Case Warning in casez at line 14 , value: 1110 has no matches

@@ -34,6 +34,6 @@ def DrivenBus(statements:list,outputWires:dict,all_variables:dict):
         arr = outputWires_dict[wire]
         for i in range(len(arr)):
             if len(arr[i]) > 1:
-                print(f'BUS_VALUE_CONFLICT at {wire}[{i}] as it is assigned multiple values concurrently at lines {",".join(arr[i])}')
+                # print(f'BUS_VALUE_CONFLICT at {wire}[{i}] as it is assigned multiple values concurrently at lines {",".join(arr[i])}')
                 report.append(f'BUS_VALUE_CONFLICT at {wire}[{i}] as it is assigned multiple values concurrently at lines {",".join(arr[i])}')
 

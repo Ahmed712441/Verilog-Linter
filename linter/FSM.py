@@ -55,7 +55,7 @@ def analyzeCase(case,prev_states):
 
     for state in states:
         report.append(f"Unreachable FSM State {state} in {case.name} at line {case.line}")
-        print(f"Unreachable FSM State {state} in {case.name} at line {case.line}")
+        # print(f"Unreachable FSM State {state} in {case.name} at line {case.line}")
         # writeToFile("reports.txt",f"Unreachable FSM State {state} in {case.name} at line {case.line}")
     
 def getUnreachableFSM(statements:list,cases:list,registers:dict):
@@ -70,6 +70,6 @@ def getUnreachableFSM(statements:list,cases:list,registers:dict):
             prev_states , deadlock = propagate_FSM(statements,case,registers[case.varname],case.varname)
             if deadlock :
                 # writeToFile("reports.txt",f"Deadlock State Warning in {case.name} at line {case.line} when {case.varname} = {deadlock}")
-                print(f"Deadlock State Warning in {case.name} at line {case.line} when {case.varname} = {deadlock}")
+                # print(f"Deadlock State Warning in {case.name} at line {case.line} when {case.varname} = {deadlock}")
                 report.append(f"Deadlock State Warning in {case.name} at line {case.line} when {case.varname} = {deadlock}")
             analyzeCase(case,prev_states)

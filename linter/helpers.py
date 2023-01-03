@@ -178,7 +178,7 @@ def keyExists(dictonary:dict,key:str):
 
 def writeOutFile(fileName:str = 'report.txt'):
 
-    with open(os.path.join(BASE_DIR,'reports',fileName),'w') as f:
+    with open(fileName,'w') as f:
         for line in report:
             f.write(line+'\n')
             # f.writeline(report)

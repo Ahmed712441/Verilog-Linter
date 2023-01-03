@@ -5,19 +5,34 @@ from linter.DrivenBus import *
 from linter.caseDetection import *
 from linter.FSM import *
 from parser.tokenizer import *
-from pathlib import Path
 import os
 import json
+import argparse
 
+parser = argparse.ArgumentParser(description='Verliog Linter')
 
+parser.add_argument('--file_path', type=str,
+                    help='your verliog code file that you want to make analysis on')
 
+parser.add_argument('--config_path', type=str,
+                    help='your configuration file which has the configuration of the lint')
+
+parser.add_argument('--output_path', type=str,
+                    help='your configuration file which has the configuration of the lint')
+
+args = parser.parse_args()
+# print(args.file_path , args.config_path , args.output_path)
+
+path = args.file_path if args.file_path else os.path.join(BASE_DIR , 'data','testfile5.v')
+output_path = args.output_path if args.output_path else os.path.join(BASE_DIR,'reports','report.txt')
+config_path = args.config_path if args.config_path else os.path.join(BASE_DIR , 'config','config.json')
 stream = None 
 config = None
 
-with open(os.path.join(BASE_DIR , 'data','testfile6.v')) as f:
+with open(path) as f:
     stream = f.read()
 
-with open(os.path.join(BASE_DIR , 'config','config.json')) as f:
+with open(config_path) as f:
     config = json.load(f)
 
 tokens = get_tokens(stream)
@@ -30,7 +45,7 @@ output_wires_dict = get_dictonary_variables(list(filter(lambda x: x.type == 'wir
 statements , intialized_reg_stat = get_statements(tokens)
 cases = getCases(tokens,all_variables_dict)
 initialized_registers = getIntializedRegisters(intialized_reg_stat)
-# initOutFile()
+
 
 if config and config["Donot Care Assignment"]:
     dontCareAssignment(statements)
@@ -51,4 +66,4 @@ if config and config["UnreachableFSM and deadlocks"]:
     getUnreachableFSM(statements,cases,initialized_registers)
 
 
-writeOutFile()
+writeOutFile(output_path)
